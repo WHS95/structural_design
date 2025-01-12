@@ -263,7 +263,7 @@ export function SlabDesignResult() {
                   <p className='font-medium'>
                     단변방향: {results.suggestedReinforcement.shortSpan}
                   </p>
-                  {input.slabType === "TWO_WAY" && (
+                  {input?.slabType === "TWO_WAY" && (
                     <p className='font-medium'>
                       장변방향: {results.suggestedReinforcement.longSpan}
                     </p>
