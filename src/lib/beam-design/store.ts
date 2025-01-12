@@ -9,16 +9,25 @@ interface BeamDesignState {
   calculate: () => void;
 }
 
-export const useBeamDesignStore = create<BeamDesignState>((set) => ({
+const useBeamDesignStore = create<BeamDesignState>()((set) => ({
   input: null,
   results: null,
-  setInput: (input) => set({ input }),
-  calculate: () =>
-    set((state) => ({
-      results: state.input ? calculateBeamDesign(state.input) : null,
-    })),
+  setInput: (input) => {
+    if (typeof window !== "undefined") {
+      set({ input });
+    }
+  },
+  calculate: () => {
+    if (typeof window !== "undefined") {
+      set((state) => ({
+        results: state.input ? calculateBeamDesign(state.input) : null,
+      }));
+    }
+  },
 }));
 
 // Selectors
 export const selectResults = (state: BeamDesignState) => state.results;
 export const selectLastInput = (state: BeamDesignState) => state.input;
+
+export { useBeamDesignStore };
